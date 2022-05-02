@@ -174,7 +174,7 @@ body {
 
 .calendar-month {
     position: relative;
-    background-color: var(--grey-200);
+    background-color: white;
     border: solid 1px var(--grey-200);
     margin: 0 5%;
     border-radius: 10px;
@@ -186,11 +186,13 @@ body {
     background-color: #fff;
     padding: 10px;
     border-radius: 10px 10px 0 0;
+
 }
 
 .calendar-month-header-selected-month {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
+    padding: 5px;
 }
 
 .calendar-month-header-selectors {
@@ -198,19 +200,25 @@ body {
     align-items: center;
     justify-content: space-between;
     width: 80px;
-
+    margin-right: 20px;
 }
 
-.calendar-month-header-selectors>* {
+.calendar-month-header-selectors>span {
     cursor: pointer;
+    background-color: #cfd7e3;
+    margin: 0 2px;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .day-of-week {
     color: var(--grey-800);
-    font-size: 12px;
+    font-size: 16px;
     background-color: #fff;
     padding-bottom: 5px;
     padding-top: 10px;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .day-of-week,
@@ -230,15 +238,14 @@ body {
     position: relative;
     grid-column-gap: var(--grid-gap);
     grid-row-gap: var(--grid-gap);
-    border-top: solid 1px var(--grey-200);
 }
 
 .calendar-day {
     position: relative;
     min-height: 30px;
-    font-size: 12px;
-    background-color: #fff;
-    color: var(--grey-800);
+    font-size: 16px;
+    background-color: lightgrey;
+    color: black;
     padding: 3px;
     display: flex;
     justify-content: center;
@@ -246,10 +253,10 @@ body {
 }
 
 
-#calendar-days>li:last-of-type {
+/* #calendar-days>li:last-of-type {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-}
+} */
 
 .calendar-day--today {
     padding-top: 4px;
@@ -261,6 +268,14 @@ body {
     background-color: var(--grey-800);
 }
 
-/* CALENDAR WIDGET END */
+#calendar-bottom-spacer {
+    height: 20px;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
 
-
+.selectedDay {
+    background-color: #3e4e63;
+    color: white;
+}

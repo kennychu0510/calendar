@@ -1,165 +1,3 @@
-const dayjs = require('dayjs');
-import "./calendar.css";
-const weekday = require("dayjs/plugin/weekday");
-const weekOfYear = require("dayjs/plugin/weekOfYear");
-dayjs.extend(weekday);
-dayjs.extend(weekOfYear);
-
-const WEEKDAYS = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
-const INITIAL_YEAR = dayjs().format('YYYY');
-const INITIAL_MONTH = dayjs().format('M');
-
-const daysOfWeekElement = document.querySelector('#days-of-week');
-
-WEEKDAYS.forEach((weekday) => {
-    const weekDayElement = document.createElement('li');
-    daysOfWeekElement.appendChild(weekDayElement);
-    weekDayElement.innerText = weekday;
-});
-
-function getNumberOfDaysInMonth(year, month) {
-    return dayjs(`${year}-${month}-01`).daysInMonth();
-}
-
-let currentMonthDays = createDaysForCurrentMonth(INITIAL_YEAR, INITIAL_MONTH);
-let previousMonthDays = createDaysForPreviousMonth(INITIAL_YEAR, INITIAL_MONTH);
-let nextMonthDays = createDaysForNextMonth(INITIAL_YEAR, INITIAL_MONTH);
-
-let days = [...this.previousMonthDays, ...this.currentMonthDays, ...this.nextMonthDays];
-
-function createDaysForCurrentMonth(year, month) {
-    return [...Array(getNumberOfDaysInMonth(year, month))].map((day, index) => {
-        return {
-            date: dayjs(`${year}-${month}-${index+1}`).format('YYYY-MM-DD'),
-            daysOfMonth: index + 1,
-            isCurrentMonth: true,
-        };
-    });
-}
-
-function getWeekday(date) {
-    return dayjs(date).weekday();
-}
-
-// For creating the days shown for the previous month
-function createDaysForPreviousMonth(year, month) {
-    const firstDayOfTheMonthWeekday = getWeekday(currentMonthDays[0].date);
-    const previousMonth = dayjs(`${year}-${month}-01`).subtract(1, 'month');
-
-    const visibleNumberOfDaysFromPreviousMonth = firstDayOfTheMonthWeekday ? firstDayOfTheMonthWeekday - 1 : 6;
-    const previousMonthLastMondayDayOfMonth = dayjs(currentMonthDays[0].date).subtract(visibleNumberOfDaysFromPreviousMonth, 'day').date();
-
-    return [...Array(visibleNumberOfDaysFromPreviousMonth)].map((day, index) => {
-        return {
-            date: dayjs(
-                `${previousMonth.year()}-${previousMonth.month()+1}-${previousMonthLastMondayDayOfMonth + index}`
-            ).format('YYYY-MM-DD'),
-            dayOfMonth: previousMonthLastMondayDayOfMonth + index,
-            isCurrentMonth: false,
-        };
-    });
-}
-
-// For creating the days shown for the next month
-function createDaysForNextMonth(year, month) {
-    const lastDayOfTheMonthWeekday = getWeekday(`${year}-${month}-${currentMonthDays.length}`);
-    const visibleNumberOfDaysFromNextMonth = lastDayOfTheMonthWeekday ? 7 - lastDayOfTheMonthWeekday : lastDayOfTheMonthWeekday;
-    return [...Array(visibleNumberOfDaysFromNextMonth)].map((day, index) => {
-        return {
-            date: dayjs(`${year}-${Number(month)+1}-${index+1}`).format('YYYY-MM-DD'),
-            dayOfMonth: index + 1,
-            isCurrentMonth: false,
-        };
-    });
-}
-
-const calendarDaysElement = document.querySelector('#calendar-days');
-removeAllDayElements(calendarDaysElement);
-
-function appendDay(day, calendarDaysElement) {
-    const dayElement = document.createElement('li');
-    const dayElementClassList = dayElement.classList;
-
-    dayElementClassList.add('calendar-day');
-
-    const dayOfMonthElement = document.createElement('span');
-
-    dayOfMonthElement.innerText = day.dayOfMonth;
-
-    if (!day.isCurrentMonth) {
-        dayElementClassList.add('calendar-day--not-current');
-    }
-
-    dayElement.appendChild(dayOfMonthElement);
-    calendarDaysElement.appendChild(dayElement);
-
-    if (day.date === TODAY) {
-        dayElementClassList.add('calendar-day--today');
-    }
-}
-
-function createCalendar(year = INITIAL_YEAR, month = INITIAL_MONTH) {
-    document.querySelector('#selected-month').innerText = dayjs(new Date(year, month - 1)).format('MMMM YYYY');
-
-    const calendarDaysElement = document.querySelector('#calendar-days');
-    removeAllDayElements(calendarDaysElement);
-
-    currentMonthDays = createDaysForCurrentMonth(
-        year,
-        month,
-        dayjs(`${year}-${month}-01`).daysInMonth(),
-    );
-
-    previousMonthDays = createDaysForPreviousMonth(year, month);
-    nextMonthDays = createDaysForNextMonth(year, month);
-    const days = [...previousMonthDays, ...currentMonthDays, ...nextMonthDays];
-    days.forEach(day => {
-        appendDay(day, calendarDaysElement);
-    });
-}
-
-function removeAllDayElements(calendarDaysElement) {
-    let first = calendarDaysElement.firstElementChild;
-    while (first) {
-        first.remove();
-        first = calendarDaysElement.firstElementChild
-    }
-}
-
-let selectedMonth = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH - 1, 1));
-
-function initMonthSelectors() {
-    document
-        .getElementById("previous-month-selector")
-        .addEventListener("click", function () {
-            selectedMonth = dayjs(selectedMonth).subtract(1, "month");
-            createCalendar(selectedMonth.format("YYYY"), selectedMonth.format("M"));
-        });
-
-
-    document
-        .getElementById("present-month-selector")
-        .addEventListener("click", function () {
-            selectedMonth = dayjs(new Date(INITIAL_YEAR, INITIAL_MONTH - 1, 1));
-            createCalendar(selectedMonth.format("YYYY"), selectedMonth.format("M"));
-        });
-
-
-    document
-        .getElementById("next-month-selector")
-        .addEventListener("click", function () {
-            selectedMonth = dayjs(selectedMonth).add(1, "month");
-            createCalendar(selectedMonth.format("YYYY"), selectedMonth.format("M"));
-        });
-}
-
-initMonthSelectors();
-
-
-const TODAY = dayjs().format("YYYY-MM-DD");
-
-
-
 // CLOCK WIDGET
 
 function updateTime() {
@@ -185,3 +23,99 @@ function setRotation(element, rotationRatio) {
 }
 
 setInterval(updateTime, 1000);
+
+const today = new Date();
+let year = today.getFullYear()
+let month = today.getMonth();
+let day = today.getDate();
+
+const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const MONTHS_SHORT = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+
+
+function daysInMonth(month, year) {
+    return new Date(year, month, 0).getDate()
+}
+
+function getFirstDayOfMonth(month, year) {
+    return new Date(year, month, 1);
+}
+
+function generateCalendarDays(daysInMonth, firstDayOfMonth = 0) {
+    for (let i = 0; i < firstDayOfMonth; i++){
+        const calendarDay = document.createElement('li')
+        calendarDay.classList.add('prev-calendar-day')
+        calendarDay.dataset.day = i
+        const spanDay = document.createElement('span')
+        calendarDay.appendChild(spanDay)
+        daysContainer.appendChild(calendarDay)
+    }
+    for (let i = 1; i <= daysInMonth; i++) {
+        const calendarDay = document.createElement('li')
+        calendarDay.classList.add('calendar-day')
+        calendarDay.dataset.day = i
+        const spanDay = document.createElement('span')
+        spanDay.textContent = i
+        calendarDay.appendChild(spanDay)
+        daysContainer.appendChild(calendarDay)
+    }
+}
+
+function highlightCalendarDay(day) {
+    daysContainer.querySelector(`li[data-day="${day}"]`).classList.add('selectedDay')
+}
+
+/* QUERY SELECTORS */
+const selectedMonth = document.querySelector('#selected-month')
+const daysContainer = document.querySelector('#calendar-days')
+const prevMonthBtn = document.querySelector('#previous-month-selector')
+const nextMonthBtn = document.querySelector('#next-month-selector')
+const todayBtn = document.querySelector('#present-month-selector')
+
+// console.log({year, month, day})
+// console.log(daysInMonth(month, year))
+// console.log(DAYS[getFirstDayOfMonth(month, year).getDay()])
+
+
+todayBtn.addEventListener('click', ()=> {
+    daysContainer.innerHTML = ''
+    year = today.getFullYear()
+    month = today.getMonth();
+    selectedMonth.textContent = `${MONTHS[month]} ${year}`
+    const offsetDays = DAYS.indexOf(DAYS[getFirstDayOfMonth(month, year).getDay()])
+    generateCalendarDays(daysInMonth(month, year), offsetDays)
+    highlightCalendarDay(day)
+})
+
+nextMonthBtn.addEventListener('click', ()=> {
+    daysContainer.innerHTML = ''
+    month++
+    if (month === 12) {
+        month = 0;
+        year++
+    }
+
+    selectedMonth.textContent = `${MONTHS[month]} ${year}`
+    const offsetDays = DAYS.indexOf(DAYS[getFirstDayOfMonth(month, year).getDay()])
+    generateCalendarDays(daysInMonth(month, year), offsetDays)
+})
+
+prevMonthBtn.addEventListener('click', () => {
+    daysContainer.innerHTML = ''
+    month--
+    if (month < 0) {
+        month = 12;
+        year--
+    }
+
+    selectedMonth.textContent = `${MONTHS[month]} ${year}`
+    const offsetDays = DAYS.indexOf(DAYS[getFirstDayOfMonth(month, year).getDay()])
+    generateCalendarDays(daysInMonth(month, year), offsetDays)
+})
+
+/* Set up calendar as today */
+selectedMonth.textContent = `${MONTHS[month]} ${year}`
+const offsetDays = DAYS.indexOf(DAYS[getFirstDayOfMonth(month, year).getDay()])
+generateCalendarDays(daysInMonth(month, year), offsetDays)
+highlightCalendarDay(day)
