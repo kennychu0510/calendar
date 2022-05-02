@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="calendar.css" />
+    <link rel="icon" type="image/x-icon" href="*" />
+    <title>Gather Now</title>
+</head>
+
+<body>
+
+    <div id="main-content">
+        <div id="search-event-container"></div>
+        <div id="widget-container">
+            <div id="clock-widget" class="grid-item">
+                <div id="clock-app-div">
+                    <div class="clock-frame">
+                        <div class="hand hour"></div>
+                        <div class="hand minute"></div>
+                        <div class="hand second"></div>
+                        <div class="number number1">1</div>
+                        <div class="number number2">2</div>
+                        <div class="number number3">3</div>
+                        <div class="number number4">4</div>
+                        <div class="number number5">5</div>
+                        <div class="number number6">6</div>
+                        <div class="number number7">7</div>
+                        <div class="number number8">8</div>
+                        <div class="number number9">9</div>
+                        <div class="number number10">10</div>
+                        <div class="number number11">11</div>
+                        <div class="number number12">12</div>
+                    </div>
+                </div>
+            </div>
+            <div id="calendar-widget" class="grid-item">
+                <!-- Parent container for the calendar month -->
+                <div class="calendar-month">
+                    <!-- Calendar header -->
+                    <div class="calendar-header">
+                        <section class="calendar-month-header">
+                            <!-- Month name -->
+                            <div id="selected-month" class="calendar-month-header-selected-month">
+                                April 2022
+                            </div>
+
+                            <!-- Pagination -->
+                            <div class="calendar-month-header-selectors">
+                                <span id="previous-month-selector">
+                                    <</span> <span id="present-month-selector">Today
+                                </span>
+                                <span id="next-month-selector">></span>
+                            </div>
+                        </section>
+                        <!-- Calendar grid header -->
+                        <ol id="days-of-week" class="day-of-week">
+                            <li>Mon</li>
+                            <li>Tue</li>
+                            <li>Wed</li>
+                            <li>Thu</li>
+                            <li>Fri</li>
+                            <li>Sat</li>
+                            <li>Sun</li>
+                        </ol>
+                        <!-- Calendar grid -->
+                        <ol id="calendar-days" class="days-grid">
+                            <li class="calendar-day"><span>1</span></li>
+                            <li class="calendar-day"><span>2</span></li>
+                            <li class="calendar-day"><span>3</span></li>
+                            <li class="calendar-day"><span>4</span></li>
+                            <li class="calendar-day"><span>5</span></li>
+                            <li class="calendar-day"><span>6</span></li>
+                            <li class="calendar-day"><span>7</span></li>
+                            <li class="calendar-day"><span>8</span></li>
+                            <li class="calendar-day"><span>9</span></li>
+                            <li class="calendar-day"><span>10</span></li>
+                            <li class="calendar-day"><span>11</span></li>
+                            <li class="calendar-day"><span>12</span></li>
+                            <li class="calendar-day"><span>13</span></li>
+                            <li class="calendar-day"><span>14</span></li>
+                            <li class="calendar-day"><span>15</span></li>
+                            <li class="calendar-day"><span>16</span></li>
+                            <li class="calendar-day"><span>17</span></li>
+                            <li class="calendar-day"><span>18</span></li>
+                            <li class="calendar-day"><span>19</span></li>
+                            <li class="calendar-day"><span>20</span></li>
+                            <li class="calendar-day"><span>21</span></li>
+                            <li class="calendar-day"><span>22</span></li>
+                            <li class="calendar-day"><span>23</span></li>
+                            <li class="calendar-day"><span>24</span></li>
+                            <li class="calendar-day"><span>25</span></li>
+                            <li class="calendar-day"><span>26</span></li>
+                            <li class="calendar-day"><span>27</span></li>
+                            <li class="calendar-day"><span>28</span></li>
+                            <li class="calendar-day"><span>29</span></li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-item">Weather</div>
+        </div>
+    </div>
+    <!-- FONT AWESOME -->
+    <script src="https://kit.fontawesome.com/a186d0ec57.js" crossorigin="anonymous"></script>
+    
+    <!-- <source src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.1/dayjs.min.js" type=""> -->
+    
+    <!-- LOCAL JS -->
+    <script type="module" src="calendar.js"></script>
+</body>
+
+</html>

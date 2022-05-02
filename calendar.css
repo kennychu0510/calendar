@@ -1,0 +1,266 @@
+html {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: sans-serif;
+    height: 100%;
+    background-color: black;
+}
+
+/* BODY CONTAINER START */
+#main-content {
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+#widget-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+}
+
+/* BODY CONTAINER END */
+
+/* WIDGET CONTAINER START */
+
+/* CLOCK WIDGET START */
+#widget-container>div {
+    padding: 20px 0;
+}
+
+#clock-app-div {
+    margin: 0 auto;
+    background-color: white;
+    color: red;
+    text-transform: uppercase;
+    width: 200px;
+    aspect-ratio: 1/1;
+    font-weight: bold;
+    border-radius: 20%;
+    font-size: 16px;
+    color: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.clock-frame {
+    background-color: white;
+    border-radius: 50%;
+    width: 85%;
+    aspect-ratio: 1/1;
+    position: relative;
+}
+
+#clock-app-div {
+    background-color: black;
+}
+
+.clock-frame .number {
+    --rotation: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transform: rotate(var(--rotation));
+}
+
+.clock-frame .number1 {
+    --rotation: 30deg;
+}
+
+.clock-frame .number2 {
+    --rotation: 60deg;
+}
+
+.clock-frame .number3 {
+    --rotation: 90deg;
+}
+
+.clock-frame .number4 {
+    --rotation: 120deg;
+}
+
+.clock-frame .number5 {
+    --rotation: 150deg;
+}
+
+.clock-frame .number6 {
+    --rotation: 180deg;
+}
+
+.clock-frame .number7 {
+    --rotation: 210deg;
+}
+
+.clock-frame .number8 {
+    --rotation: 240deg;
+}
+
+.clock-frame .number9 {
+    --rotation: 270deg;
+}
+
+.clock-frame .number10 {
+    --rotation: 300deg;
+}
+
+.clock-frame .number11 {
+    --rotation: 330deg;
+}
+
+.clock-frame .hand {
+    --rotation: 0;
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    height: 45%;
+    width: 5px;
+    background-color: black;
+    transform-origin: bottom;
+    transform: translateX(-50%) rotate(calc(var(--rotation) * 1deg));
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    /* z-index: 10; */
+}
+
+.clock-frame .hand.hour {
+    height: 30%;
+}
+
+.clock-frame .hand.second {
+    width: 3%;
+    background-color: red;
+}
+
+.clock-frame::after {
+    content: '';
+    position: absolute;
+    background-color: black;
+    /* z-index: 11; */
+    width: 7%;
+    height: 7%;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* CLOCK WIDGET END */
+
+/* CALENDAR WIDGET START */
+
+#calendar-widget {
+    width: 60%;
+    --grey-100: #e4e9f0;
+    --grey-200: #cfd7e3;
+    --grey-300: #b5c0cd;
+    --grey-800: #3e4e63;
+    --grid-gap: 1px;
+    --day-label-size: 20px;
+}
+
+#calendar-widget li {
+    list-style: none;
+    padding: 5px;
+}
+
+#calendar-widget ol {
+    margin: 0;
+}
+
+.calendar-month {
+    position: relative;
+    background-color: var(--grey-200);
+    border: solid 1px var(--grey-200);
+    margin: 0 5%;
+    border-radius: 10px;
+}
+
+.calendar-month-header {
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    padding: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.calendar-month-header-selected-month {
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.calendar-month-header-selectors {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 80px;
+
+}
+
+.calendar-month-header-selectors>* {
+    cursor: pointer;
+}
+
+.day-of-week {
+    color: var(--grey-800);
+    font-size: 12px;
+    background-color: #fff;
+    padding-bottom: 5px;
+    padding-top: 10px;
+}
+
+.day-of-week,
+.days-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    padding: 0;
+}
+
+.day-of-week>* {
+    text-align: center;
+    padding-right: 5px;
+}
+
+.days-grid {
+    height: 100%;
+    position: relative;
+    grid-column-gap: var(--grid-gap);
+    grid-row-gap: var(--grid-gap);
+    border-top: solid 1px var(--grey-200);
+}
+
+.calendar-day {
+    position: relative;
+    min-height: 30px;
+    font-size: 12px;
+    background-color: #fff;
+    color: var(--grey-800);
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#calendar-days>li:last-of-type {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.calendar-day--today {
+    padding-top: 4px;
+}
+
+.calendar-day--today>div {
+    color: #fff;
+    border-radius: 9999px;
+    background-color: var(--grey-800);
+}
+
+/* CALENDAR WIDGET END */
+
+
